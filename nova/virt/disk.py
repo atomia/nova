@@ -63,7 +63,7 @@ flags.DEFINE_integer('max_nbd_devices', 16,
 #                 No escape nor exceptional handling for ','.
 #                 DEFINE_list() doesn't give us what we need.
 flags.DEFINE_multistring('virt_mkfs',
-                         ['windows=mkfs.ntfs --fast --label %(fs_label)s '
+                         ['windows=mkfs.ntfs --force --fast --label %(fs_label)s '
                           '%(target)s',
                           # NOTE(yamahata): vfat case
                           #'windows=mkfs.vfat -n %(fs_label)s %(target)s',

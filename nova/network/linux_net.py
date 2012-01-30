@@ -399,8 +399,15 @@ def init_host():
 
     iptables_manager.ipv4['nat'].add_rule('POSTROUTING',
                                           '-s %(range)s -d %(range)s '
-                                          '-j ACCEPT' % \
+                                          '-j ACCEPT ! -p tcp' % \
                                           {'range': FLAGS.fixed_range})
+                                        
+    iptables_manager.ipv4['nat'].add_rule('POSTROUTING',
+                                          '-s %(range)s -d %(range)s '
+                                          '-j ACCEPT -p tcp '
+                                          '-m multiport ! --destination-ports 53' % \
+                                          {'range': FLAGS.fixed_range})
+
     iptables_manager.apply()
 
 
